@@ -1,5 +1,5 @@
 <div id="top"></div>
-[![MIT License][license-shield]] [license-url]
+[![MIT License][https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge] [https://github.com/ac12644/NFT-Marketplace/blob/main/LICENSE]
 
 <!-- PROJECT LOGO -->
 
@@ -10,6 +10,8 @@
   </a>
 
   <h3 align="center">NFT Marketplace</h3>
+  <br/>
+  <a href="https://marketplace-46f99.web.app/">Link</a>
 
   <p align="center">
     An awesome marketplace to turn your products or services into publicly tradeable items.
@@ -86,7 +88,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/ac12644/NFT-Marketplace/blob/main/LICENSE
+
 [product-screenshot]: https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fscreenshot.png?alt=media&token=b788b18e-cd33-43f4-9fb8-ee3dc6555bb6
 [product-screenshot2]: https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2FScreenshot%202022-07-03%20at%2012.24.19.png?alt=media&token=7528e3b4-72df-4660-b576-2c072e7cce1c
