@@ -1,6 +1,3 @@
-<div id="top"></div>
-[![MIT License][https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge] [https://github.com/ac12644/NFT-Marketplace/blob/main/LICENSE]
-
 <!-- PROJECT LOGO -->
 
 <br />
