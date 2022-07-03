@@ -58,3 +58,10 @@ _Below are instructions to get started
    ```sh
    yarn run dev
    ```
+   
+   
+   
+  
+[license-url]: https://github.com/ac12644/NFT-Marketplace/blob/main/LICENSE
+[forks-url]: https://github.com/ac12644/NFT-Marketplace/network/members
+[stars-url]: https://github.com/ac12644/NFT-Marketplace/stargazers
