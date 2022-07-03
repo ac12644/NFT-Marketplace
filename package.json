@@ -1,0 +1,102 @@
+{
+  "name": "thefront-js--nextjs",
+  "author": "maccarian",
+  "email": "hi@maccarianagency.com",
+  "version": "4.7.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
+    "start": "next start",
+    "prettier:fix": "prettier './src/**/*.js' --write",
+    "eslint:fix": "eslint ./src --fix",
+    "codeStyle:fix": "npm run prettier:fix && npm run eslint:fix",
+    "clear-all": "rimraf ./node_modules ./.next"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "last 2 versions",
+      "Firefox ESR",
+      "not dead",
+      "not IE 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@coinbase/wallet-sdk": "^3.3.0",
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.7.1",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.4",
+    "@mui/lab": "^5.0.0-alpha.87",
+    "@mui/material": "^5.2.4",
+    "@nomiclabs/hardhat-ethers": "^2.0.6",
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@openzeppelin/contracts": "^4.6.0",
+    "@walletconnect/web3-provider": "^1.7.8",
+    "aos": "^2.3.4",
+    "axios": "^0.27.2",
+    "card-validator": "^8.1.1",
+    "chai": "^4.3.6",
+    "dotenv": "^16.0.1",
+    "ethereum-waffle": "^3.4.4",
+    "ethers": "^5.6.9",
+    "formik": "^2.2.6",
+    "fs": "^0.0.1-security",
+    "hardhat": "^2.9.9",
+    "hardhat-gas-reporter": "^1.0.8",
+    "ipfs-http-client": "^57.0.1",
+    "jarallax": "^2.0.3",
+    "next": "^12.1.6",
+    "prop-types": "^15.8.1",
+    "react": "^18.1.0",
+    "react-blockies": "^1.4.1",
+    "react-countup": "^6.2.0",
+    "react-dom": "^18.1.0",
+    "react-image-lightbox": "^5.1.4",
+    "react-lazy-load-image-component": "^1.5.4",
+    "react-slick": "^0.29.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "react-toastify": "^9.0.5",
+    "react-typed": "^1.2.0",
+    "react-visibility-sensor": "^5.1.1",
+    "slick-carousel": "^1.8.1",
+    "solidity-coverage": "^0.7.21",
+    "web3": "^1.7.4",
+    "web3modal": "^1.9.8",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-styled-components": "^2.0.7",
+    "cross-env": "^7.0.2",
+    "eslint": "^8.15.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "prettier": "^2.6.2",
+    "prettier-eslint": "^15.0.0",
+    "prettier-eslint-cli": "^6.0.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.6.4"
+  }
+}
