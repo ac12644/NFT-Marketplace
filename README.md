@@ -35,6 +35,7 @@ Marketplace Functions:
 ### Built With
 
 - [Next.js](https://nextjs.org/)
+- [Material UI](https://mui.com/)
 - [Hardhat](https://hardhat.org/)
 - [Solidity](https://docs.soliditylang.org/)
 
