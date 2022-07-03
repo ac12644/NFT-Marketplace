@@ -22,7 +22,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fscreenshot.png?alt=media&token=b788b18e-cd33-43f4-9fb8-ee3dc6555bb6)
+[![Product Name Screen Shot][product-screenshot]]()
 
 Marketplace Functions:
 * When a user puts an NFT for sale, the ownership of the NFT gets transferred from the creator to the marketplace contract 📝.
@@ -65,3 +65,4 @@ _Below are instructions to get started
 [license-url]: https://github.com/ac12644/NFT-Marketplace/blob/main/LICENSE
 [forks-url]: https://github.com/ac12644/NFT-Marketplace/network/members
 [stars-url]: https://github.com/ac12644/NFT-Marketplace/stargazers
+[product-screenshot]: https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fscreenshot.png?alt=media&token=b788b18e-cd33-43f4-9fb8-ee3dc6555bb6
