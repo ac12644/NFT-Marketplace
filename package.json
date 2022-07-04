@@ -1,9 +1,9 @@
 {
-  "name": "thefront-js--nextjs",
-  "author": "maccarian",
-  "email": "hi@maccarianagency.com",
-  "version": "4.7.0",
-  "private": true,
+  "name": "nft marketplace",
+  "author": "abhishek chauhan",
+  "email": "ac12644@gmail.com",
+  "version": "1.0",
+  "private": false,
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
