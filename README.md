@@ -7,7 +7,7 @@
   </a>
 
   <h3 align="center">NFT Marketplace</h3>
- <!--  <a href="https://marketplace-46f99.web.app/">Link</a> -->
+  <a href="https://marketplace-46f99.web.app/">Link</a>
 
   <p align="center">
     An awesome marketplace to turn your products or services into publicly tradeable items.
