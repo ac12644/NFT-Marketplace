@@ -46,7 +46,7 @@ Marketplace Functions:
 
 1. Clone the repo
    ```sh
-     https://github.com/ac12644/NFT-Marketplace.git
+   git clone https://github.com/ac12644/NFT-Marketplace.git
    ```
 2. Install packages
    ```sh
