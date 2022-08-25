@@ -43,8 +43,8 @@ const validationSchema = yup.object({
     .min(0, 'Price should be minimum 3')
     .matches(
       /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Enter correct url!'
-    )
+      'Enter correct url!',
+    ),
 });
 
 const Form = () => {
@@ -60,256 +60,254 @@ const Form = () => {
       console.log(values);
       setLoading(true);
       createMarket();
-    }
+    },
   });
-  
+
   const [alertOpen, setAlertOpen] = useState(false);
   const [loading, setLoading] = React.useState(false);
   const [fileUrl, setFileUrl] = useState('');
   const router = useRouter();
   const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
-  
+
   async function createSale(url) {
     if (fileUrl) {
       const web3Modal = new Web3Modal({
-        network: "mainnet",
+        network: 'mainnet',
         cacheProvider: true,
       });
-      const connection = await web3Modal.connect()
-      const provider = new ethers.providers.Web3Provider(connection)    
-      const signer = provider.getSigner()
-      
-      let contract = new ethers.Contract(nftAddress, NFT.abi, signer)
-      let transaction = await contract.createToken(url)
-      let tx = await transaction.wait()
-      let event = tx.events[0]
-      let value = event.args[2]
-      let tokenId = value.toNumber()
-      const price = web3.utils.toWei(formik.values.price, 'ether')
-  
-      const listingPrice = web3.utils.toWei('0.1', 'ether')
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
 
-      contract = new ethers.Contract(marketAddress, Marketplace.abi, signer)
-      transaction = await contract.createMarketItem(nftAddress, tokenId, price, { value: listingPrice })
-      
+      let contract = new ethers.Contract(nftAddress, NFT.abi, signer);
+      let transaction = await contract.createToken(url);
+      let tx = await transaction.wait();
+      let event = tx.events[0];
+      let value = event.args[2];
+      let tokenId = value.toNumber();
+      const price = web3.utils.toWei(formik.values.price, 'ether');
+
+      const listingPrice = web3.utils.toWei('0.1', 'ether');
+
+      contract = new ethers.Contract(marketAddress, Marketplace.abi, signer);
+      transaction = await contract.createMarketItem(
+        nftAddress,
+        tokenId,
+        price,
+        { value: listingPrice },
+      );
+
       try {
-        await transaction.wait()
+        await transaction.wait();
         //console.log('10.1 transaction.wait------success')
       } catch (error) {
         //console.log('10.2 transaction.wait------error', error)
         alert('Error in creating NFT! Please try again.');
         setLoading(false);
-
       }
       alert('NFT created successfully');
       setLoading(false);
     }
-    
-    if (!fileUrl) return (setAlertOpen(true)); 
-  }  
+
+    if (!fileUrl) return setAlertOpen(true);
+  }
 
   async function onChange(e) {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     try {
-      const added = await client.add(
-        file,
-        {
-          progress: (prog) => console.log(`received: ${prog}`)
-        }
-      )
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`
+      const added = await client.add(file, {
+        progress: (prog) => console.log(`received: ${prog}`),
+      });
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       setFileUrl(url);
       console.log('----------------', fileUrl);
     } catch (error) {
-      console.log('Error uploading file: ', error)
-    }  
+      console.log('Error uploading file: ', error);
+    }
   }
 
   async function createMarket() {
     const { name, description, price, address } = formik.values;
-    if (!name || !description || !price || !fileUrl) return
+    if (!name || !description || !price || !fileUrl) return;
     /* first, upload to IPFS */
     const data = JSON.stringify({
-      name, description, address, image: fileUrl
+      name,
+      description,
+      address,
+      image: fileUrl,
     });
     try {
-      const added = await client.add(data)
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`
-      createSale(url)
+      const added = await client.add(data);
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      createSale(url);
     } catch (error) {
       console.log('Error uploading file: ', error);
-    }  
+    }
   }
 
   return (
-        <Box>
-          <form onSubmit={formik.handleSubmit}>
-            <Grid container spacing={4}>
-            <Grid item xs={12} sm={6}>
-                <Typography
-                  variant={'subtitle2'}
-                  sx={{ marginBottom: 2, display: 'flex', alignItems: 'center' }}
-                  fontWeight={700}
-                >
-                  <AttachFileIcon fontSize="medium" />
-                  Upload file *
-                </Typography>
-                   <input
-                     type='file'
-                     name={'file'}
-                     onChange={onChange}
-                   />
-                {
-                  fileUrl && (
-                    <Alert
-                      severity='success'
-                      action={
-                        <IconButton
-                          aria-label="close"
-                          color="inherit"
-                          size="small"
-                          onClick={() => {
-                            setAlertOpen(false);
-                          }}
-                        >
-                          <CloseIcon fontSize="inherit" />
-                        </IconButton>
-                      }
-                      sx={{ mt: 1 }}
-                    >
-                      File uploaded successfully!
-                    </Alert>
-                  )
-                }
-                <Box sx={{ width: '100%' }}>
-                  <Collapse in={alertOpen}>
-                    <Alert
-                      severity='error'
-                      action={
-                        <IconButton
-                          aria-label="close"
-                          color="inherit"
-                          size="small"
-                          onClick={() => {
-                            setAlertOpen(false);
-                          }}
-                        >
-                          <CloseIcon fontSize="inherit" />
-                        </IconButton>
-                      }
-                      sx={{ mb: 2 }}
-                    >
-                      Please upload a file!
-                    </Alert>
-                  </Collapse>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography
-                  variant={'subtitle2'}
-                  sx={{ marginBottom: 2 }}
-                  fontWeight={700}
-                >
-                  NFT Name
-                </Typography>
-                <TextField
-                  label="Name of your NFT *"
-                  variant="outlined"
-                  name={'name'}
-                  fullWidth
-                  onChange={formik.handleChange}
-                  value={formik.values?.name}
-                  error={
-                    formik.touched.name && Boolean(formik.errors.name)
-                  }
-                  helperText={formik.touched.name && formik.errors.name}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography
-                  variant={'subtitle2'}
-                  sx={{ marginBottom: 2 }}
-                  fontWeight={700}
-                >
-                  Description
-                </Typography>
-                <TextField
-                  label="Description *"
-                  variant="outlined"
-                  name={'description'}
-                  multiline
-                  rows={3}
-                  fullWidth
-                  onChange={formik.handleChange}
-                  value={formik.values?.description}
-                  error={formik.touched.description && Boolean(formik.errors.description)}
-                  helperText={formik.touched.description && formik.errors.description}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography
-                  variant={'subtitle2'}
-                  sx={{ marginBottom: 2 }}
-                  fontWeight={700}
-                >
-                  Price
-                </Typography>
-                <TextField
-                  label="Price in Matic *"
-                  variant="outlined"
-                  name={'price'}
-                  fullWidth
-                  onChange={formik.handleChange}
-                  value={formik.values?.price}
-                  error={
-                    formik.touched.price && Boolean(formik.errors.price)
-                  }
-                  helperText={formik.touched.price && formik.errors.price}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography
-                  variant={'subtitle2'}
-                  sx={{ marginBottom: 2 }}
-                  fontWeight={700}
-                >
-                  Link
-                </Typography>
-                <TextField
-                  label="Link to your NFT"
-                  variant="outlined"
-                  name={'address'}
-                  fullWidth
-                  onChange={formik.handleChange}
-                  value={formik.values?.address}
-                  error={formik.touched.address && Boolean(formik.errors.address)}
-                  helperText={formik.touched.address && formik.errors.address}
-                />
-              </Grid>
-              <Grid item container xs={12}>
-                <Box
-                  display="flex"
-                  flexDirection={{ xs: 'column', sm: 'row' }}
-                  alignItems={{ xs: 'stretched', sm: 'center' }}
-                  justifyContent={'space-between'}
-                  width={1}
-                  margin={'0 auto'}
-                >
-                  <LoadingButton 
-                    endIcon={<SendIcon />} 
-                    size={'large'} 
-                    variant={'contained'} 
-                    type={'submit'}
-                    loading={loading}
-                    loadingPosition={'end'}
+    <Box>
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6}>
+            <Typography
+              variant={'subtitle2'}
+              sx={{ marginBottom: 2, display: 'flex', alignItems: 'center' }}
+              fontWeight={700}
+            >
+              <AttachFileIcon fontSize="medium" />
+              Upload file *
+            </Typography>
+            <input type="file" name={'file'} onChange={onChange} />
+            {fileUrl && (
+              <Alert
+                severity="success"
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setAlertOpen(false);
+                    }}
                   >
-                    Create
-                  </LoadingButton>
-                </Box>
-              </Grid>
-            </Grid>
-          </form>
-        </Box>
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+                sx={{ mt: 1 }}
+              >
+                File uploaded successfully!
+              </Alert>
+            )}
+            <Box sx={{ width: '100%' }}>
+              <Collapse in={alertOpen}>
+                <Alert
+                  severity="error"
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setAlertOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  sx={{ mb: 2 }}
+                >
+                  Please upload a file!
+                </Alert>
+              </Collapse>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography
+              variant={'subtitle2'}
+              sx={{ marginBottom: 2 }}
+              fontWeight={700}
+            >
+              NFT Name
+            </Typography>
+            <TextField
+              label="Name of your NFT *"
+              variant="outlined"
+              name={'name'}
+              fullWidth
+              onChange={formik.handleChange}
+              value={formik.values?.name}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              variant={'subtitle2'}
+              sx={{ marginBottom: 2 }}
+              fontWeight={700}
+            >
+              Description
+            </Typography>
+            <TextField
+              label="Description *"
+              variant="outlined"
+              name={'description'}
+              multiline
+              rows={3}
+              fullWidth
+              onChange={formik.handleChange}
+              value={formik.values?.description}
+              error={
+                formik.touched.description && Boolean(formik.errors.description)
+              }
+              helperText={
+                formik.touched.description && formik.errors.description
+              }
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography
+              variant={'subtitle2'}
+              sx={{ marginBottom: 2 }}
+              fontWeight={700}
+            >
+              Price
+            </Typography>
+            <TextField
+              label="Price in Matic *"
+              variant="outlined"
+              name={'price'}
+              fullWidth
+              onChange={formik.handleChange}
+              value={formik.values?.price}
+              error={formik.touched.price && Boolean(formik.errors.price)}
+              helperText={formik.touched.price && formik.errors.price}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography
+              variant={'subtitle2'}
+              sx={{ marginBottom: 2 }}
+              fontWeight={700}
+            >
+              Link
+            </Typography>
+            <TextField
+              label="Link to your NFT"
+              variant="outlined"
+              name={'address'}
+              fullWidth
+              onChange={formik.handleChange}
+              value={formik.values?.address}
+              error={formik.touched.address && Boolean(formik.errors.address)}
+              helperText={formik.touched.address && formik.errors.address}
+            />
+          </Grid>
+          <Grid item container xs={12}>
+            <Box
+              display="flex"
+              flexDirection={{ xs: 'column', sm: 'row' }}
+              alignItems={{ xs: 'stretched', sm: 'center' }}
+              justifyContent={'space-between'}
+              width={1}
+              margin={'0 auto'}
+            >
+              <LoadingButton
+                endIcon={<SendIcon />}
+                size={'large'}
+                variant={'contained'}
+                type={'submit'}
+                loading={loading}
+                loadingPosition={'end'}
+              >
+                Create
+              </LoadingButton>
+            </Box>
+          </Grid>
+        </Grid>
+      </form>
+    </Box>
   );
 };
 

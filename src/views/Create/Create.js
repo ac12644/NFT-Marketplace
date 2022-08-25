@@ -14,7 +14,7 @@ export default function CreateItem() {
   return (
     <Main>
       <Container>
-        <Hero title='A platform to create and trade NFTs.' />
+        <Hero title="A platform to create and trade NFTs." />
       </Container>
       <Container paddingY={'0 !important'}>
         <Form />
@@ -49,9 +49,9 @@ export default function CreateItem() {
           ></path>
         </Box>
         <Container>
-          <Contact/>
+          <Contact />
         </Container>
       </Box>
-  </Main>
-  )
+    </Main>
+  );
 }
