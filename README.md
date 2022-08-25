@@ -56,6 +56,7 @@ Marketplace Functions:
    ```sh
    yarn run dev
    ```
+3. Make sure to connect with Polygon testnet using your wallet
 
 <!-- CONTRIBUTING -->
 
