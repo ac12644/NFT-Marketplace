@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 
@@ -61,7 +60,7 @@ export default function Dashboard() {
     setNfts(items);
     setLoadingState(true);
   }
-  if (loadingState == true && !nfts.length) {
+  if (!nfts.length) {
     return (
       <Main>
         <Container>

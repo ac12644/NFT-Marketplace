@@ -1,17 +1,35 @@
-# build react app
-FROM node:12.16.1-alpine3.9 as build
+# Install dependencies 
+FROM node:16-alpine AS deps
+
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-COPY ./package.json /app/
-COPY ./yarn.lock /app/
-RUN yarn
-COPY . /app
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+# Rebuild the source code only when needed
+FROM node:16-alpine AS builder
+
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+
+COPY . .
+
 RUN yarn build
 
-# build the final image and copy the react build files
-FROM nginx:1.17.8-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx/nginx.conf /etc/nginx/conf.d
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Production image, copy all the files and run next
+FROM node:16-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+
+
+EXPOSE 3000
+
+ENV PORT 3000
+
+CMD ["yarn", "run dev"]
