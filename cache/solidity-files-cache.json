@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/ac12644/Desktop/NFT-Marketplace/contracts/Marketplace.sol": {
-      "lastModificationDate": 1661508561063,
-      "contentHash": "6d38f2cb7134ad75d39d288431eac3b7",
+      "lastModificationDate": 1661517376210,
+      "contentHash": "9e699d324a2c5e0ee9e39286f53357d2",
       "sourceName": "contracts/Marketplace.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -32,6 +32,7 @@
         "@openzeppelin/contracts/utils/Counters.sol",
         "@openzeppelin/contracts/security/ReentrancyGuard.sol",
         "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
         "hardhat/console.sol"
       ],
       "versionPragmas": [
@@ -473,46 +474,6 @@
       ],
       "artifacts": [
         "IERC165"
-      ]
-    },
-    "/Users/ac12644/Desktop/NFT-Marketplace/contracts/NFT.sol": {
-      "lastModificationDate": 1661508572662,
-      "contentHash": "b49dbd5f70d18a0ae14921daf22cbb3d",
-      "sourceName": "contracts/NFT.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/utils/Counters.sol",
-        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        "hardhat/console.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "NFT"
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
