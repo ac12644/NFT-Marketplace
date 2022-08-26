@@ -18,8 +18,8 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]()
-[![Product Name Screen Shot][product-screenshot2]]()
+[![Video][product-screenshot]](assets/vid.mp4)
+[![Screenshot](https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2FScreenshot%202022-07-03%20at%2012.24.19.png?alt=media&token=7528e3b4-72df-4660-b576-2c072e7cce1c)
 
 Marketplace Functions:
 
@@ -50,7 +50,7 @@ Marketplace Functions:
    ```
 2. Install packages
    ```sh
-   yarn
+   yarn add
    ```
 3. Install packages
    ```sh
@@ -85,4 +85,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [product-screenshot]: https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fscreenshot.png?alt=media&token=b788b18e-cd33-43f4-9fb8-ee3dc6555bb6
-[product-screenshot2]: https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2FScreenshot%202022-07-03%20at%2012.24.19.png?alt=media&token=7528e3b4-72df-4660-b576-2c072e7cce1c
