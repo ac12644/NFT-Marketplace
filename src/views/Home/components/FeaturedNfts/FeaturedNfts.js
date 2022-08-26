@@ -162,7 +162,9 @@ const FeaturedNfts = ({ data = [], buttonFunc }) => {
                       </Box>
                       <Button
                         variant={'contained'}
-                        onClick={() => buttonFunc(item)}
+                        onClick={() => {
+                          buttonFunc(item);
+                        }}
                         startIcon={
                           <Box
                             component={'svg'}

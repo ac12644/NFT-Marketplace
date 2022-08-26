@@ -8,18 +8,16 @@ import Hero from 'components/Hero';
 import PortfolioGrid from 'components/PortfolioGrid';
 import Contact from 'components/Contact';
 
-import web3 from 'web3';
 import axios from 'axios';
 import Web3Modal from 'web3modal';
-import { marketAddress, nftAddress } from '/Address';
+import { marketAddress } from '/Address';
 import Marketplace from '/artifacts/contracts/Marketplace.sol/Marketplace.json';
-import NFT from '/artifacts/contracts/NFT.sol/NFT.json';
 import { ethers } from 'ethers';
 
 export default function CreateItem() {
   const theme = useTheme();
   const [nfts, setNfts] = useState([]);
-  const [loadingState, setLoadingState] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     loadNFTs();
@@ -39,29 +37,30 @@ export default function CreateItem() {
       Marketplace.abi,
       signer,
     );
-    const tokenContract = new ethers.Contract(nftAddress, NFT.abi, provider);
     const data = await marketContract.fetchMyNFTs();
+    console.log(data);
 
     const items = await Promise.all(
       data.map(async (i) => {
-        const tokenUri = await tokenContract.tokenURI(i.tokenId);
-        const meta = await axios.get(tokenUri);
-        let price = web3.utils.fromWei(i.price.toString(), 'ether');
+        const tokenURI = await marketContract.tokenURI(i.tokenId);
+        const meta = await axios.get(tokenURI);
+        let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
         let item = {
           price,
           tokenId: i.tokenId.toNumber(),
           seller: i.seller,
           owner: i.owner,
           image: meta.data.image,
+          tokenURI,
         };
         return item;
       }),
     );
     setNfts(items);
-    setLoadingState(false);
+    setLoaded(true);
   }
 
-  if (loadingState && !nfts.length) {
+  if (loaded && !nfts.length) {
     return (
       <Main>
         <Container>

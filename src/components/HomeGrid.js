@@ -8,13 +8,12 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-
-const HomeGrid = ({data=[], buttonFunc, buttonName}) => {
+const HomeGrid = ({ data = [], buttonFunc, buttonName }) => {
   const theme = useTheme();
   return (
     <Box>
       <Box marginBottom={4}>
-      <Typography
+        <Typography
           sx={{
             textTransform: 'uppercase',
             fontWeight: 'medium',
@@ -36,82 +35,20 @@ const HomeGrid = ({data=[], buttonFunc, buttonName}) => {
         >
           Browse our popular NFTs
         </Typography>
-        </Box>
-    <Grid container spacing={{ xs: 2, sm: 4 }}>
-      <Grid item xs={12} md={5}>
-        {data.map((item, i) => 
-          <Card
-            key={i}
-            elevation={3}
-            sx={{
-              p: { xs: 2, sm: 4 },
-              height: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-            }}
-          >
-            <Box sx={{ p: 4, mb: 2 }}>
-              <Box
-                component={LazyLoadImage}
-                effect="blur"
-                src={item.image}
-                width={1}
-                maxWidth={1}
-                sx={{
-                  filter:
-                    theme.palette.mode === 'dark' ? 'brightness(0.5)' : 'none',
-                }}
-              />
-            </Box>
-            <Box>
-              <Typography
-                color={'primary'}
-                fontWeight={700}
-                variant={'caption'}
-                sx={{ textTransform: 'uppercase' }}
-              >
-                {item.price} ETH
-              </Typography>
-              <Typography variant={'h5'} fontWeight={700} marginY={1}>
-                {item.name}
-              </Typography>
-              <Typography color={'text.secondary'}>
-                {item.description}
-              </Typography>
-              <Link
-                onClick={()=>buttonFunc(item)}
-                variant={'subtitle2'}
-                color={'primary'}
-                fontWeight={700}
-                underline={'hover'}
-                sx={{
-                  textTransform: 'uppercase',
-                  display: 'block',
-                  cursor: 'pointer',
-                  mt: { xs: 2, sm: 4 },
-                }}
-              >
-                {buttonName}
-              </Link>
-            </Box>
-          </Card>
-         )[5]}
-      </Grid>
-
-      <Grid item xs={12} md={7}>
-        <Grid container spacing={{ xs: 2, sm: 4 }}>
-          <Grid item xs={12} >
-            {data.map((item, i) => 
+      </Box>
+      <Grid container spacing={{ xs: 2, sm: 4 }}>
+        <Grid item xs={12} md={5}>
+          {
+            data.map((item, i) => (
               <Card
                 key={i}
                 elevation={3}
                 sx={{
                   p: { xs: 2, sm: 4 },
-                  maxHeight: 1,
+                  height: 1,
                   display: 'flex',
-                  flexDirection: { xs: 'column', sm: 'row-reverse' },
-                  alignItems: 'center',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
                 }}
               >
                 <Box sx={{ p: 4, mb: 2 }}>
@@ -145,7 +82,9 @@ const HomeGrid = ({data=[], buttonFunc, buttonName}) => {
                     {item.description}
                   </Typography>
                   <Link
-                    onClick={()=>buttonFunc(item)}
+                    onClick={() => {
+                      buttonFunc(item);
+                    }}
                     variant={'subtitle2'}
                     color={'primary'}
                     fontWeight={700}
@@ -159,86 +98,157 @@ const HomeGrid = ({data=[], buttonFunc, buttonName}) => {
                   >
                     {buttonName}
                   </Link>
-                 
                 </Box>
               </Card>
-            )[5]}
-          </Grid>
+            ))[0]
+          }
+        </Grid>
 
-          <Grid item xs={12}>
-            {data.map((item, i) => 
-              <Card
-                elevation={3}
-                sx={{
-                  p: { xs: 2, sm: 4 },
-                  maxHeight: 1,
-                  display: 'flex',
-                  flexDirection: { xs: 'column', sm: 'row' },
-                  alignItems: 'center',
-                }}
-              >
-                <Box sx={{ p: 4, mb: 2 }}>
-                  <Box
-                    component={LazyLoadImage}
-                    effect="blur"
-                    src={item.image}
-                    width={1}
-                    maxWidth={1}
+        <Grid item xs={12} md={7}>
+          <Grid container spacing={{ xs: 2, sm: 4 }}>
+            <Grid item xs={12}>
+              {
+                data.map((item, i) => (
+                  <Card
+                    key={i}
+                    elevation={3}
                     sx={{
-                      filter:
-                        theme.palette.mode === 'dark'
-                          ? 'brightness(0.5)'
-                          : 'none',
-                    }}
-                  />
-                </Box>
-                <Box>
-                  <Typography
-                    color={'primary'}
-                    fontWeight={700}
-                    variant={'caption'}
-                    sx={{ textTransform: 'uppercase' }}
-                  >
-                    {item.price} ETH
-                  </Typography>
-                  <Typography variant={'h5'} fontWeight={700} marginY={1}>
-                    {item.name}
-                  </Typography>
-                  <Typography color={'text.secondary'}>
-                    {item.description}
-                  </Typography>
-                  <Link
-                    onClick={()=>buttonFunc(item)}
-                    variant={'subtitle2'}
-                    color={'primary'}
-                    fontWeight={700}
-                    underline={'hover'}
-                    sx={{
-                      textTransform: 'uppercase',
-                      display: 'block',
-                      cursor: 'pointer',
-                      mt: { xs: 2, sm: 4 },
+                      p: { xs: 2, sm: 4 },
+                      maxHeight: 1,
+                      display: 'flex',
+                      flexDirection: { xs: 'column', sm: 'row-reverse' },
+                      alignItems: 'center',
                     }}
                   >
-                    {buttonName}
-                  </Link>
-                </Box>
-              </Card>
-             )[5]}
+                    <Box sx={{ p: 4, mb: 2 }}>
+                      <Box
+                        component={LazyLoadImage}
+                        effect="blur"
+                        src={item.image}
+                        width={1}
+                        maxWidth={1}
+                        sx={{
+                          filter:
+                            theme.palette.mode === 'dark'
+                              ? 'brightness(0.5)'
+                              : 'none',
+                        }}
+                      />
+                    </Box>
+                    <Box>
+                      <Typography
+                        color={'primary'}
+                        fontWeight={700}
+                        variant={'caption'}
+                        sx={{ textTransform: 'uppercase' }}
+                      >
+                        {item.price} ETH
+                      </Typography>
+                      <Typography variant={'h5'} fontWeight={700} marginY={1}>
+                        {item.name}
+                      </Typography>
+                      <Typography color={'text.secondary'}>
+                        {item.description}
+                      </Typography>
+                      <Link
+                        onClick={() => {
+                          buttonFunc(item);
+                        }}
+                        variant={'subtitle2'}
+                        color={'primary'}
+                        fontWeight={700}
+                        underline={'hover'}
+                        sx={{
+                          textTransform: 'uppercase',
+                          display: 'block',
+                          cursor: 'pointer',
+                          mt: { xs: 2, sm: 4 },
+                        }}
+                      >
+                        {buttonName}
+                      </Link>
+                    </Box>
+                  </Card>
+                ))[3]
+              }
+            </Grid>
+
+            <Grid item xs={12}>
+              {
+                data.map((item, i) => (
+                  <Card
+                    elevation={3}
+                    sx={{
+                      p: { xs: 2, sm: 4 },
+                      maxHeight: 1,
+                      display: 'flex',
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Box sx={{ p: 4, mb: 2 }}>
+                      <Box
+                        component={LazyLoadImage}
+                        effect="blur"
+                        src={item.image}
+                        width={1}
+                        maxWidth={1}
+                        sx={{
+                          filter:
+                            theme.palette.mode === 'dark'
+                              ? 'brightness(0.5)'
+                              : 'none',
+                        }}
+                      />
+                    </Box>
+                    <Box>
+                      <Typography
+                        color={'primary'}
+                        fontWeight={700}
+                        variant={'caption'}
+                        sx={{ textTransform: 'uppercase' }}
+                      >
+                        {item.price} ETH
+                      </Typography>
+                      <Typography variant={'h5'} fontWeight={700} marginY={1}>
+                        {item.name}
+                      </Typography>
+                      <Typography color={'text.secondary'}>
+                        {item.description}
+                      </Typography>
+                      <Link
+                        onClick={() => {
+                          buttonFunc(item);
+                        }}
+                        variant={'subtitle2'}
+                        color={'primary'}
+                        fontWeight={700}
+                        underline={'hover'}
+                        sx={{
+                          textTransform: 'uppercase',
+                          display: 'block',
+                          cursor: 'pointer',
+                          mt: { xs: 2, sm: 4 },
+                        }}
+                      >
+                        {buttonName}
+                      </Link>
+                    </Box>
+                  </Card>
+                ))[2]
+              }
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
- 
-  
     </Box>
   );
 };
 
 HomeGrid.propTypes = {
-    buttonFunc: PropTypes.func,
-    data: PropTypes.array,
-    buttonName: PropTypes.string,
+  buttonFunc: PropTypes.func,
+  data: PropTypes.array,
+  buttonName: PropTypes.string,
 };
-  
+
 export default HomeGrid;

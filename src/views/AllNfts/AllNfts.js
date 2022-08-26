@@ -4,19 +4,16 @@ import { useTheme } from '@mui/material/styles';
 
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-import HomeGrid from 'components/HomeGrid';
 import Contact from 'components/Contact';
-import Hero from './components/Hero';
-import FeaturedNfts from './components/FeaturedNfts';
+import PortfolioGrid from 'components/PortfolioGrid';
 
 import axios from 'axios';
-import web3 from 'web3';
 import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import { marketAddress } from '/Address';
 import Marketplace from '/artifacts/contracts/Marketplace.sol/Marketplace.json';
 
-const Home = () => {
+const AllNfts = () => {
   const theme = useTheme();
   const [nfts, setNfts] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -84,9 +81,6 @@ const Home = () => {
   if (loaded && !nfts.length)
     return (
       <Main>
-        <Container>
-          <Hero />
-        </Container>
         <Box
           position={'relative'}
           marginTop={{ xs: 4, md: 6 }}
@@ -125,13 +119,7 @@ const Home = () => {
   return (
     <Main>
       <Container>
-        <Hero />
-      </Container>
-      <Container paddingY={3}>
-        <HomeGrid data={nfts} buttonName={'Buy'} buttonFunc={buyNft} />
-      </Container>
-      <Container>
-        <FeaturedNfts data={nfts} buttonFunc={buyNft} />
+        <PortfolioGrid data={nfts} buttonName={'Buy'} buttonFunc={buyNft} />
       </Container>
       <Box
         position={'relative'}
@@ -170,4 +158,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AllNfts;

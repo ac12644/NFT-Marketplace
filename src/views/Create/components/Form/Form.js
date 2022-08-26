@@ -18,9 +18,8 @@ import web3 from 'web3';
 import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import { create } from 'ipfs-http-client';
-import { marketAddress, nftAddress } from '/Address';
+import { marketAddress } from '/Address';
 import Marketplace from '/artifacts/contracts/Marketplace.sol/Marketplace.json';
-import NFT from '/artifacts/contracts/NFT.sol/NFT.json';
 
 const validationSchema = yup.object({
   name: yup
@@ -91,27 +90,17 @@ const Form = () => {
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
 
-      let nftContract = new ethers.Contract(nftAddress, NFT.abi, signer);
-      let transaction = await nftContract.createToken(url);
-
-      let tx = await transaction.wait();
-      let event = tx.events[0];
-      let value = event.args[2];
-      let tokenId = value.toNumber();
       const price = web3.utils.toWei(formik.values.price, 'ether');
-
-      let marketContract = new ethers.Contract(
+      let contract = new ethers.Contract(
         marketAddress,
         Marketplace.abi,
         signer,
       );
-      let listingPrice = await marketContract.getListingPrice();
-      transaction = await marketContract.createMarketItem(
-        nftAddress,
-        tokenId,
-        price,
-        { value: listingPrice },
-      );
+      let listingPrice = await contract.getListingPrice();
+      listingPrice = listingPrice.toString();
+      let transaction = await contract.createToken(url, price, {
+        value: listingPrice,
+      });
 
       try {
         await transaction.wait();
