@@ -2,8 +2,13 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/ac12644/Desktop/NFT-Marketplace/contracts/Marketplace.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661508561063,
       "contentHash": "6d38f2cb7134ad75d39d288431eac3b7",
+=======
+      "lastModificationDate": 1661431295659,
+      "contentHash": "7d0997c30ad1a8c817f92877980a4a6b",
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "sourceName": "contracts/Marketplace.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -42,7 +47,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507831099,
+=======
+      "lastModificationDate": 1661422330714,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
       "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
@@ -77,7 +86,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507831068,
+=======
+      "lastModificationDate": 1661422330712,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "92f9448b23a90ea3bb932ee55cc3ccce",
       "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
       "solcConfig": {
@@ -112,7 +125,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507867411,
+=======
+      "lastModificationDate": 1661422376669,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "79ff1a7eb801a525aa315fb7a679eede",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -155,7 +172,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/hardhat/console.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507819750,
+=======
+      "lastModificationDate": 1661422301802,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "4ff3cd2f6272c9a6516e9ee4f2b967d3",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {
@@ -190,7 +211,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507867411,
+=======
+      "lastModificationDate": 1661422376668,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "ec99d946db3685a3630554aa6055bd7f",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
@@ -227,7 +252,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507867411,
+=======
+      "lastModificationDate": 1661422376674,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "c22d4395e33763de693fd440c6fd10e1",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
@@ -262,7 +291,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507885720,
+=======
+      "lastModificationDate": 1661422396416,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
@@ -299,7 +332,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507831096,
+=======
+      "lastModificationDate": 1661422330714,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "c476b3895a94798b88a4bb97399e6dfe",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
@@ -334,7 +371,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507831094,
+=======
+      "lastModificationDate": 1661422330714,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -369,7 +410,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507831099,
+=======
+      "lastModificationDate": 1661422330719,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "cf46906c4035f51639a22265066a9e78",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
@@ -404,7 +449,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507867453,
+=======
+      "lastModificationDate": 1661422376769,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -441,7 +490,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507867454,
+=======
+      "lastModificationDate": 1661422376771,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -476,7 +529,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/contracts/NFT.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661508572662,
+=======
+      "lastModificationDate": 1661428397071,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "b49dbd5f70d18a0ae14921daf22cbb3d",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
@@ -516,7 +573,11 @@
       ]
     },
     "/Users/ac12644/Desktop/NFT-Marketplace/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+<<<<<<< HEAD
       "lastModificationDate": 1661507885717,
+=======
+      "lastModificationDate": 1661422396416,
+>>>>>>> 9e34fdb6f997ee8de20472dfc2be66575a055bf0
       "contentHash": "8af32effd0536e2971ff8496812a5016",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       "solcConfig": {

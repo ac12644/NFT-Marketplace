@@ -11,7 +11,7 @@ import CardActions from '@mui/material/CardActions';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-const FeaturedNfts = ({ data=[], buttonFunc }) => {
+const FeaturedNfts = ({ data = [], buttonFunc }) => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -162,7 +162,7 @@ const FeaturedNfts = ({ data=[], buttonFunc }) => {
                       </Box>
                       <Button
                         variant={'contained'}
-                        onClick={()=>buttonFunc(item)}
+                        onClick={() => buttonFunc(item)}
                         startIcon={
                           <Box
                             component={'svg'}
@@ -194,13 +194,9 @@ const FeaturedNfts = ({ data=[], buttonFunc }) => {
                     >
                       {item.name}
                     </Typography>
-                    <Box
-                      marginTop={2}
-                      display={'flex'} 
-                      alignItems={'center'}
-                    >
+                    <Box marginTop={2} display={'flex'} alignItems={'center'}>
                       <Typography variant={'subtitle1'} color="text.secondary">
-                          {item.description}
+                        {item.description}
                       </Typography>
                     </Box>
                   </CardContent>
@@ -220,8 +216,6 @@ const FeaturedNfts = ({ data=[], buttonFunc }) => {
 
 FeaturedNfts.propTypes = {
   data: PropTypes.array,
-
 };
 
 export default FeaturedNfts;
-

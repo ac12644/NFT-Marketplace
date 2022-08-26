@@ -35,7 +35,6 @@ const Hero = () => {
               </Typography>
             </Box>
           </Box>
-         
         </Grid>
         <Grid item xs={12} md={6}>
           <Box height={1} width={1} display={'flex'} justifyContent={'center'}>

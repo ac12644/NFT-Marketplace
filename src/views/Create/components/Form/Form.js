@@ -93,6 +93,7 @@ const Form = () => {
 
       let nftContract = new ethers.Contract(nftAddress, NFT.abi, signer);
       let transaction = await nftContract.createToken(url);
+
       let tx = await transaction.wait();
       let event = tx.events[0];
       let value = event.args[2];
