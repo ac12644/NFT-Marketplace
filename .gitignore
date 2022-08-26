@@ -110,7 +110,6 @@ dist
 
 #Hardhat files
 cache
-artifacts
 
 #Hardhat build
 build/contracts
