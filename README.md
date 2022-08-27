@@ -19,7 +19,10 @@
 ## About The Project
 
 [![Video][product-screenshot]](assets/vid.mp4)
-[![Screenshot](https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2FScreenshot%202022-07-03%20at%2012.24.19.png?alt=media&token=7528e3b4-72df-4660-b576-2c072e7cce1c)
+
+![Screenshot](https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2FScreenshot%202022-08-26%20at%2021.53.06.png?alt=media&token=06aafd86-7b27-46c3-a234-c59a3124a14f)
+
+![Screenshot](https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2FScreenshot%202022-07-03%20at%2012.24.19.png?alt=media&token=7528e3b4-72df-4660-b576-2c072e7cce1c)
 
 Marketplace Functions:
 
