@@ -24,13 +24,14 @@
 
 ![Screenshot](https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2FScreenshot%202022-07-03%20at%2012.24.19.png?alt=media&token=7528e3b4-72df-4660-b576-2c072e7cce1c)
 
-Marketplace Functions:
+###⚙️ Functions:
 
-- When a user puts an NFT for sale, the ownership of the NFT gets transferred from the creator to the marketplace contract 📝.
-
-- When a user purchases an NFT, the purchase price is transferred from the buyer to the seller and so the item will be transferred from the marketplace to the buyer🧑.
-
-- The marketplace owner is able to set a listing fee. This fee is taken from the seller and transferred to the contract owner upon completion of any sale, enabling the owner of the marketplace to earn recurring revenue from any sale transacted in the marketplace.
+- Web3 auth using metamask🦊/walletconnect/coinbase
+- Create & list tokens for sale
+- Using IPFS for uploading the file📁
+- Marketplace owner can set platform fee
+- Buyer can purchase token and list it again for sale
+- Contract📝 is deployed on Matic mumbai testnet (https://mumbai.polygonscan.com/address/0x0E1Ee61D5C435C1320E3fb766328F35263E41Bff)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -53,9 +54,9 @@ Marketplace Functions:
    ```
 2. Install packages
    ```sh
-   yarn add
+   yarn 
    ```
-3. Install packages
+3. Run application
    ```sh
    yarn run dev
    ```
