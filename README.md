@@ -24,7 +24,7 @@
 
 ![Screenshot](https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2FScreenshot%202022-07-03%20at%2012.24.19.png?alt=media&token=7528e3b4-72df-4660-b576-2c072e7cce1c)
 
-###⚙️ Functions:
+### ⚙️Functions:
 
 - Web3 auth using metamask🦊/walletconnect/coinbase
 - Create & list tokens for sale
