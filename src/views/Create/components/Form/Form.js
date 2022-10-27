@@ -122,7 +122,7 @@ const Form = () => {
       const added = await client.add(file, {
         progress: (prog) => console.log(`received: ${prog}`),
       });
-      const url = `https://ac12644.infura-ipfs.io/ipfs/${added.path}`;
+      const url = `https://ac12644.infura-ipfs.io/ipfs/${added.path}`; //DEDICATED SUBDOMAIN FROM INFURA
       setFileUrl(url);
       console.log('----------------', fileUrl);
     } catch (error) {
