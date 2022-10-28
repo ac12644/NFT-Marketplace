@@ -55,7 +55,6 @@ const Form = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       setLoading(true);
       createMarket();
     },
@@ -111,6 +110,8 @@ const Form = () => {
         setLoading(false);
       }
       alert('NFT created successfully');
+      formik.resetForm();
+      setAlertOpen(false);
       setLoading(false);
     }
 
@@ -144,7 +145,7 @@ const Form = () => {
     });
     try {
       const added = await client.add(data);
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      const url = `${infuraDomain}/ipfs/${added.path}`;
       createSale(url);
     } catch (error) {
       console.log('Error uploading file: ', error);
