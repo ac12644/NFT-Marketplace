@@ -66,6 +66,7 @@ const Form = () => {
   const [fileUrl, setFileUrl] = useState('');
   const projectId = process.env.INFURA_IPFS_ID;
   const projectSecret = process.env.INFURA_IPFS_SECRET;
+  const infuraDomain = process.env.INFURA_IPFS_DOMAIN;
 
   const auth =
     'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
@@ -122,7 +123,7 @@ const Form = () => {
       const added = await client.add(file, {
         progress: (prog) => console.log(`received: ${prog}`),
       });
-      const url = `https://ac12644.infura-ipfs.io/ipfs/${added.path}`; //DEDICATED SUBDOMAIN FROM INFURA
+      const url = `${infuraDomain}/ipfs/${added.path}`; //DEDICATED SUBDOMAIN FROM INFURA
       setFileUrl(url);
       console.log('----------------', fileUrl);
     } catch (error) {
