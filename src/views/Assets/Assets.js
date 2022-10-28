@@ -38,8 +38,6 @@ export default function CreateItem() {
       signer,
     );
     const data = await marketContract.fetchMyNFTs();
-    console.log(data);
-
     const items = await Promise.all(
       data.map(async (i) => {
         const tokenURI = await marketContract.tokenURI(i.tokenId);

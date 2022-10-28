@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
+import {
+  Box,
+  Grid,
+  TextField,
+  Typography,
+  IconButton,
+  Collapse,
+  Alert,
+} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
-import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
-import Alert from '@mui/material/Alert';
+import DialogBox from 'components/DialogBox';
 
 import web3 from 'web3';
 import Web3Modal from 'web3modal';
@@ -60,9 +63,13 @@ const Form = () => {
     },
   });
 
+  const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [loading, setLoading] = React.useState(false);
   const [fileUrl, setFileUrl] = useState('');
+  const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
+  const [hash, setHash] = useState('');
+
   const projectId = process.env.INFURA_IPFS_ID;
   const projectSecret = process.env.INFURA_IPFS_SECRET;
   const infuraDomain = process.env.INFURA_IPFS_DOMAIN;
@@ -103,14 +110,14 @@ const Form = () => {
 
       try {
         await transaction.wait();
-        //console.log('10.1 transaction.wait------success')
+        setHash(transaction.hash);
+        setDialogBoxOpen(true);
       } catch (error) {
-        //console.log('10.2 transaction.wait------error', error)
         alert('Error in creating NFT! Please try again.');
         setLoading(false);
       }
-      alert('NFT created successfully');
       formik.resetForm();
+      setFileUrl('');
       setAlertOpen(false);
       setLoading(false);
     }
@@ -126,10 +133,13 @@ const Form = () => {
       });
       const url = `${infuraDomain}/ipfs/${added.path}`; //DEDICATED SUBDOMAIN FROM INFURA
       setFileUrl(url);
-      console.log('----------------', fileUrl);
+      console.log(url);
+      setOpen(true);
     } catch (error) {
       console.log('Error uploading file: ', error);
       setLoading(false);
+      setAlertOpen(true);
+      setOpen(false);
     }
   }
 
@@ -166,26 +176,26 @@ const Form = () => {
               Upload file *
             </Typography>
             <input type="file" name={'file'} onChange={onChange} />
-            {fileUrl && (
+            <Collapse in={open}>
               <Alert
                 severity="success"
+                sx={{ mt: 1 }}
                 action={
                   <IconButton
                     aria-label="close"
                     color="inherit"
                     size="small"
                     onClick={() => {
-                      setAlertOpen(false);
+                      setOpen(false);
                     }}
                   >
                     <CloseIcon fontSize="inherit" />
                   </IconButton>
                 }
-                sx={{ mt: 1 }}
               >
                 File uploaded successfully!
               </Alert>
-            )}
+            </Collapse>
             <Box sx={{ width: '100%' }}>
               <Collapse in={alertOpen}>
                 <Alert
@@ -314,6 +324,14 @@ const Form = () => {
           </Grid>
         </Grid>
       </form>
+      <DialogBox
+        open={dialogBoxOpen}
+        onClose={() => setDialogBoxOpen(false)}
+        title={'Yeee!'}
+        message={`NFT created successfully with hash: ${hash}`}
+        buttonText="View on polygonscan"
+        buttonLink={`https://mumbai.polygonscan.com/tx/${hash}`}
+      />
     </Box>
   );
 };
