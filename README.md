@@ -264,6 +264,188 @@ function getListingPrice() public view returns (uint256) {
   }
 ```
 
+#### Javascript functions
+
+1. INFURA IPFS uploader
+
+```javascript
+const auth =
+  'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+
+const client = create({
+  host: 'ipfs.infura.io',
+  port: 5001,
+  protocol: 'https',
+  headers: {
+    authorization: auth,
+  },
+});
+
+async function onChange(e) {
+  const file = e.target.files[0];
+  try {
+    const added = await client.add(file, {
+      progress: (prog) => console.log(`received: ${prog}`),
+    });
+    const url = `${infuraDomain}/ipfs/${added.path}`; //DEDICATED SUBDOMAIN FROM INFURA
+    console.log(url);
+  } catch (error) {
+    console.log('Error uploading file: ', error);
+  }
+}
+```
+
+2. Create NFT and put on sale
+
+```javascript
+  async function createSale(url) {
+      const web3Modal = new Web3Modal({
+        network: 'mainnet',
+        cacheProvider: true,
+      });
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+
+      const price = web3.utils.toWei(formik.values.price, 'ether');
+      let contract = new ethers.Contract(
+        marketAddress,
+        Marketplace.abi,
+        signer,
+      );
+      let listingPrice = await contract.getListingPrice();
+      listingPrice = listingPrice.toString();
+      let transaction = await contract.createToken(url, price, {
+        value: listingPrice,
+      });
+      try {
+        await transaction.wait();
+        console.log(transaction.transactionHash);
+      } catch (error) {
+        alert('Error in creating NFT! Please try again.');
+
+      }
+
+  async function createMarket() {
+    const { name, description, price, address } = formik.values;
+    if (!name || !description || !price || !fileUrl) return;
+    /* first, upload to IPFS */
+    const data = JSON.stringify({
+      name,
+      description,
+      address,
+      image: fileUrl,
+    });
+    try {
+      const added = await client.add(data);
+      const url = `${infuraDomain}/ipfs/${added.path}`;
+      createSale(url);
+    } catch (error) {
+      console.log('Error uploading file: ', error);
+    }
+  }
+
+
+```
+
+3. Get listed NFTs
+
+```javascript
+async function loadNFTs() {
+  const provider = new ethers.providers.JsonRpcProvider(
+    'https://rpc-mumbai.maticvigil.com',
+  );
+  const marketContract = new ethers.Contract(
+    marketAddress,
+    Marketplace.abi,
+    provider,
+  );
+  const data = await marketContract.fetchMarketItems();
+
+  const items = await Promise.all(
+    data.map(async (i) => {
+      const tokenUri = await marketContract.tokenURI(i.tokenId);
+      const meta = await axios.get(tokenUri);
+      let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+      let item = {
+        price,
+        tokenId: i.tokenId.toNumber(),
+        seller: i.seller,
+        owner: i.owner,
+        image: meta.data.image,
+        name: meta.data.name,
+        description: meta.data.description,
+        address: meta.data.address,
+      };
+      return item;
+    }),
+  );
+  {
+    console.log('items: ', items);
+  }
+}
+```
+
+4. Purchase NFT
+
+```javascript
+async function buyNft(nft) {
+  /* needs the user to sign the transaction, so will use Web3Provider and sign it */
+  const web3Modal = new Web3Modal();
+  const connection = await web3Modal.connect();
+  const provider = new ethers.providers.Web3Provider(connection);
+  const signer = provider.getSigner();
+  const marketContract = new ethers.Contract(
+    marketAddress,
+    Marketplace.abi,
+    signer,
+  );
+  /* user will be prompted to pay the asking proces to complete the transaction */
+  const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
+  const transaction = await marketContract.createMarketSale(nft.tokenId, {
+    value: price,
+  });
+  await transaction.wait();
+  loadNFTs();
+}
+```
+
+5. Get owned NFTs
+
+```javascript
+async function loadNFTs() {
+  const web3Modal = new Web3Modal({
+    network: 'mainnet',
+    cacheProvider: true,
+  });
+  const connection = await web3Modal.connect();
+  const provider = new ethers.providers.Web3Provider(connection);
+  const signer = provider.getSigner();
+  const marketContract = new ethers.Contract(
+    marketAddress,
+    Marketplace.abi,
+    signer,
+  );
+  const data = await marketContract.fetchMyNFTs();
+  const items = await Promise.all(
+    data.map(async (i) => {
+      const tokenURI = await marketContract.tokenURI(i.tokenId);
+      const meta = await axios.get(tokenURI);
+      let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+      let item = {
+        price,
+        tokenId: i.tokenId.toNumber(),
+        seller: i.seller,
+        owner: i.owner,
+        image: meta.data.image,
+        tokenURI,
+      };
+      return item;
+    }),
+  );
+}
+```
+
 <!-- CONTRIBUTING -->
 
 ## Contributing
