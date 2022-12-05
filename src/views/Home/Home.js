@@ -10,7 +10,6 @@ import Hero from './components/Hero';
 import FeaturedNfts from './components/FeaturedNfts';
 
 import axios from 'axios';
-import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import Marketplace from 'contracts/Marketplace.sol/Marketplace.json';
 
@@ -60,17 +59,15 @@ const Home = () => {
   }
 
   async function buyNft(nft) {
-    /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
+    const provider = new ethers.providers.JsonRpcProvider(
+      'https://rpc-mumbai.maticvigil.com',
+    );
     const marketContract = new ethers.Contract(
       marketAddress,
       Marketplace.abi,
-      signer,
+      provider,
     );
-    /* user will be prompted to pay the asking proces to complete the transaction */
+    const signer = provider.getSigner();
     const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
     const transaction = await marketContract.createMarketSale(nft.tokenId, {
       value: price,
