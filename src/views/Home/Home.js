@@ -10,11 +10,11 @@ import Hero from './components/Hero';
 import FeaturedNfts from './components/FeaturedNfts';
 
 import axios from 'axios';
-import web3 from 'web3';
 import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
-import { marketAddress } from '/Address';
-import Marketplace from '/artifacts/contracts/Marketplace.sol/Marketplace.json';
+import Marketplace from 'contracts/Marketplace.sol/Marketplace.json';
+
+const marketAddress = '0xe8502962B39457528e47532f851CDA389Aab8208';
 
 const Home = () => {
   const theme = useTheme();
