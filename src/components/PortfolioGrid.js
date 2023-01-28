@@ -148,7 +148,6 @@ const PortfolioGrid = ({ data = [], buttonFunc, buttonName }) => {
 };
 
 PortfolioGrid.propTypes = {
-  buttonFunc: PropTypes.func,
   data: PropTypes.array,
   buttonName: PropTypes.string,
 };
