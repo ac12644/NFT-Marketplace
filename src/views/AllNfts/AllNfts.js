@@ -8,11 +8,8 @@ import Contact from 'components/Contact';
 import PortfolioGrid from 'components/PortfolioGrid';
 
 import axios from 'axios';
-import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import Marketplace from 'contracts/Marketplace.sol/Marketplace.json';
-
-const marketAddress = '0xe8502962B39457528e47532f851CDA389Aab8208';
 
 const AllNfts = () => {
   const theme = useTheme();
@@ -25,10 +22,10 @@ const AllNfts = () => {
 
   async function loadNFTs() {
     const provider = new ethers.providers.JsonRpcProvider(
-      'https://rpc-mumbai.maticvigil.com',
+      'https://rpc-mumbai.maticvigil.com/',
     );
     const marketContract = new ethers.Contract(
-      marketAddress,
+      process.env.MARKETPLACE_ADDRESS,
       Marketplace.abi,
       provider,
     );
@@ -55,26 +52,6 @@ const AllNfts = () => {
 
     setNfts(items);
     setLoaded(true);
-  }
-
-  async function buyNft(nft) {
-    /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    const marketContract = new ethers.Contract(
-      marketAddress,
-      Marketplace.abi,
-      signer,
-    );
-    /* user will be prompted to pay the asking proces to complete the transaction */
-    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
-    const transaction = await marketContract.createMarketSale(nft.tokenId, {
-      value: price,
-    });
-    await transaction.wait();
-    loadNFTs();
   }
 
   if (loaded && !nfts.length)
@@ -118,7 +95,7 @@ const AllNfts = () => {
   return (
     <Main>
       <Container>
-        <PortfolioGrid data={nfts} buttonName={'Buy'} buttonFunc={buyNft} />
+        <PortfolioGrid data={nfts} buttonShow={true} />
       </Container>
       <Box
         position={'relative'}

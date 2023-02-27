@@ -10,7 +10,6 @@ import Contact from 'components/Contact';
 
 import axios from 'axios';
 import Web3Modal from 'web3modal';
-import { marketAddress } from '/Address';
 import Marketplace from '/artifacts/contracts/Marketplace.sol/Marketplace.json';
 import { ethers } from 'ethers';
 
@@ -18,10 +17,6 @@ export default function CreateItem() {
   const theme = useTheme();
   const [nfts, setNfts] = useState([]);
   const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    loadNFTs();
-  }, []);
 
   async function loadNFTs() {
     const web3Modal = new Web3Modal({
@@ -33,7 +28,7 @@ export default function CreateItem() {
     const signer = provider.getSigner();
 
     const marketContract = new ethers.Contract(
-      marketAddress,
+      process.env.MARKETPLACE_ADDRESS,
       Marketplace.abi,
       signer,
     );
@@ -57,8 +52,11 @@ export default function CreateItem() {
     setNfts(items);
     setLoaded(true);
   }
+  useEffect(() => {
+    loadNFTs();
+  }, []);
 
-  if (loaded && !nfts.length) {
+  if (loaded && !nfts) {
     return (
       <Main>
         <Container>
@@ -107,7 +105,7 @@ export default function CreateItem() {
         <Hero title="A platform to create and trade NFTs." />
       </Container>
       <Container paddingY={'0 !important'}>
-        <PortfolioGrid data={nfts} buttonName="List For Sale" />
+        <PortfolioGrid data={nfts} buttonShow={false} />
       </Container>
       <Box
         position={'relative'}

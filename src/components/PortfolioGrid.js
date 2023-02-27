@@ -13,8 +13,36 @@ import LinkIcon from '@mui/icons-material/Link';
 import Link from '@mui/material/Link';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
-const PortfolioGrid = ({ data = [], buttonFunc, buttonName }) => {
+import Web3Modal from 'web3modal';
+import { ethers } from 'ethers';
+import Marketplace from 'contracts/Marketplace.sol/Marketplace.json';
+
+const PortfolioGrid = ({ data = [], buttonShow }) => {
   const theme = useTheme();
+
+  async function buyNft(nft) {
+    /* needs the user to sign the transaction, so will use Web3Provider and sign it */
+    const web3Modal = new Web3Modal({
+      network: 'mainnet',
+      cacheProvider: true,
+    });
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+    const marketContract = new ethers.Contract(
+      process.env.MARKETPLACE_ADDRESS,
+      Marketplace.abi,
+      signer,
+    );
+    /* user will be prompted to pay the asking price to complete the transaction */
+    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
+
+    const transaction = await marketContract.createMarketSale(nft.tokenId, {
+      value: price,
+    });
+    await transaction.wait();
+    await loadNFTs();
+  }
 
   return (
     <Box>
@@ -54,7 +82,7 @@ const PortfolioGrid = ({ data = [], buttonFunc, buttonName }) => {
                       borderRadius={2}
                     >
                       <Typography sx={{ fontWeight: 600 }}>
-                        {item.price} ETH
+                        {item.price} MATIC
                       </Typography>
                     </Box>
                     <Box
@@ -116,26 +144,26 @@ const PortfolioGrid = ({ data = [], buttonFunc, buttonName }) => {
                     </Typography>
                   </Box>
                   <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Button
-                      onClick={() => {
-                        buttonFunc(item);
-                      }}
-                      startIcon={
-                        <Box
-                          component={'svg'}
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          width={24}
-                          height={24}
-                        >
-                          <ShoppingBagIcon />
-                        </Box>
-                      }
-                    >
-                      {buttonName}
-                    </Button>
+                    {buttonShow && (
+                      <Button
+                        onClick={() => buyNft(item)}
+                        startIcon={
+                          <Box
+                            component={'svg'}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            width={24}
+                            height={24}
+                          >
+                            <ShoppingBagIcon />
+                          </Box>
+                        }
+                      >
+                        Buy
+                      </Button>
+                    )}
                   </CardActions>
                 </CardContent>
               </Box>
@@ -149,7 +177,7 @@ const PortfolioGrid = ({ data = [], buttonFunc, buttonName }) => {
 
 PortfolioGrid.propTypes = {
   data: PropTypes.array,
-  buttonName: PropTypes.string,
+  buttonShow: PropTypes.bool,
 };
 
 export default PortfolioGrid;

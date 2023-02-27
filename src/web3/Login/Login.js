@@ -165,7 +165,7 @@ export const Login = () => {
     <div className="container">
       {web3Provider ? (
         <Account
-          icon="https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Ficon.png?alt=media&token=51904b60-2b20-47aa-9502-67f4aabc8061"
+          icon={`https://api.dicebear.com/5.x/identicon/svg?seed=${address}`}
           address={ellipseAddress(address)}
           handleLogout={disconnect}
         />

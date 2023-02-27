@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-const HomeGrid = ({ data = [], buttonFunc, buttonName }) => {
+const HomeGrid = ({ data = [] }) => {
   const theme = useTheme();
   return (
     <Box>
@@ -81,23 +80,6 @@ const HomeGrid = ({ data = [], buttonFunc, buttonName }) => {
                   <Typography color={'text.secondary'}>
                     {item.description}
                   </Typography>
-                  <Link
-                    onClick={() => {
-                      buttonFunc(item);
-                    }}
-                    variant={'subtitle2'}
-                    color={'primary'}
-                    fontWeight={700}
-                    underline={'hover'}
-                    sx={{
-                      textTransform: 'uppercase',
-                      display: 'block',
-                      cursor: 'pointer',
-                      mt: { xs: 2, sm: 4 },
-                    }}
-                  >
-                    {buttonName}
-                  </Link>
                 </Box>
               </Card>
             ))[0]
@@ -150,23 +132,6 @@ const HomeGrid = ({ data = [], buttonFunc, buttonName }) => {
                       <Typography color={'text.secondary'}>
                         {item.description}
                       </Typography>
-                      <Link
-                        onClick={() => {
-                          buttonFunc(item);
-                        }}
-                        variant={'subtitle2'}
-                        color={'primary'}
-                        fontWeight={700}
-                        underline={'hover'}
-                        sx={{
-                          textTransform: 'uppercase',
-                          display: 'block',
-                          cursor: 'pointer',
-                          mt: { xs: 2, sm: 4 },
-                        }}
-                      >
-                        {buttonName}
-                      </Link>
                     </Box>
                   </Card>
                 ))[3]
@@ -216,23 +181,6 @@ const HomeGrid = ({ data = [], buttonFunc, buttonName }) => {
                       <Typography color={'text.secondary'}>
                         {item.description}
                       </Typography>
-                      <Link
-                        onClick={() => {
-                          buttonFunc(item);
-                        }}
-                        variant={'subtitle2'}
-                        color={'primary'}
-                        fontWeight={700}
-                        underline={'hover'}
-                        sx={{
-                          textTransform: 'uppercase',
-                          display: 'block',
-                          cursor: 'pointer',
-                          mt: { xs: 2, sm: 4 },
-                        }}
-                      >
-                        {buttonName}
-                      </Link>
                     </Box>
                   </Card>
                 ))[2]
@@ -246,9 +194,7 @@ const HomeGrid = ({ data = [], buttonFunc, buttonName }) => {
 };
 
 HomeGrid.propTypes = {
-  buttonFunc: PropTypes.func,
   data: PropTypes.array,
-  buttonName: PropTypes.string,
 };
 
 export default HomeGrid;

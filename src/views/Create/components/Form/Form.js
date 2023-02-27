@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import {
@@ -21,8 +21,6 @@ import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import { create } from 'ipfs-http-client';
 import Marketplace from 'contracts/Marketplace.sol/Marketplace.json';
-
-const marketAddress = '0xe8502962B39457528e47532f851CDA389Aab8208';
 
 const validationSchema = yup.object({
   name: yup
@@ -70,6 +68,7 @@ const Form = () => {
   const [fileUrl, setFileUrl] = useState('');
   const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
   const [hash, setHash] = useState('');
+  const fileInputRef = useRef(null);
 
   const projectId = process.env.INFURA_IPFS_ID;
   const projectSecret = process.env.INFURA_IPFS_SECRET;
@@ -99,7 +98,7 @@ const Form = () => {
 
       const price = web3.utils.toWei(formik.values.price, 'ether');
       let contract = new ethers.Contract(
-        marketAddress,
+        process.env.MARKETPLACE_ADDRESS,
         Marketplace.abi,
         signer,
       );
@@ -117,9 +116,12 @@ const Form = () => {
         alert('Error in creating NFT! Please try again.');
         setLoading(false);
       }
-      formik.resetForm();
-      setFileUrl('');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''; // clear the file input
+      }
       setAlertOpen(false);
+      formik.resetForm();
+      console.log(fileUrl);
       setLoading(false);
     }
 
@@ -139,7 +141,6 @@ const Form = () => {
     } catch (error) {
       console.log('Error uploading file: ', error);
       setLoading(false);
-      setAlertOpen(true);
       setOpen(false);
     }
   }
@@ -176,7 +177,12 @@ const Form = () => {
               <AttachFileIcon fontSize="medium" />
               Upload file *
             </Typography>
-            <input type="file" name={'file'} onChange={onChange} />
+            <input
+              type="file"
+              name={'file'}
+              onChange={onChange}
+              ref={fileInputRef}
+            />
             <Collapse in={open}>
               <Alert
                 severity="success"

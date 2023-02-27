@@ -13,8 +13,6 @@ import axios from 'axios';
 import { ethers } from 'ethers';
 import Marketplace from 'contracts/Marketplace.sol/Marketplace.json';
 
-const marketAddress = '0xe8502962B39457528e47532f851CDA389Aab8208';
-
 const Home = () => {
   const theme = useTheme();
   const [nfts, setNfts] = useState([]);
@@ -29,7 +27,7 @@ const Home = () => {
       'https://rpc-mumbai.maticvigil.com',
     );
     const marketContract = new ethers.Contract(
-      marketAddress,
+      process.env.MARKETPLACE_ADDRESS,
       Marketplace.abi,
       provider,
     );
@@ -56,24 +54,6 @@ const Home = () => {
 
     setNfts(items);
     setLoaded(true);
-  }
-
-  async function buyNft(nft) {
-    const provider = new ethers.providers.JsonRpcProvider(
-      'https://rpc-mumbai.maticvigil.com',
-    );
-    const marketContract = new ethers.Contract(
-      marketAddress,
-      Marketplace.abi,
-      provider,
-    );
-    const signer = provider.getSigner();
-    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
-    const transaction = await marketContract.createMarketSale(nft.tokenId, {
-      value: price,
-    });
-    await transaction.wait();
-    loadNFTs();
   }
 
   if (loaded && !nfts.length)
@@ -123,10 +103,10 @@ const Home = () => {
         <Hero />
       </Container>
       <Container paddingY={3}>
-        <HomeGrid data={nfts} buttonName={'Buy'} buttonFunc={buyNft} />
+        <HomeGrid data={nfts} />
       </Container>
       <Container>
-        <FeaturedNfts data={nfts} buttonFunc={buyNft} />
+        <FeaturedNfts data={nfts} />
       </Container>
       <Box
         position={'relative'}
