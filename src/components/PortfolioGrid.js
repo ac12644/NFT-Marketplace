@@ -161,7 +161,7 @@ const PortfolioGrid = ({ data = [], buttonShow }) => {
                           </Box>
                         }
                       >
-                        Buy
+                        Comprar
                       </Button>
                     )}
                   </CardActions>
