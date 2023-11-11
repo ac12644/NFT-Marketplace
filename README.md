@@ -11,10 +11,10 @@
 <br />
 <div align="center">
   <a href="#">
-    <img src="https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fnft.png?alt=media&token=58741d5d-9f34-4884-a30e-3cb24c0f2028" alt="Logo" width="120" height="50">
+    <img src="https://svgshare.com/i/zYS.svg" alt="Logo" width="120" height="50">
   </a>
 
-  <h3 align="center">NFT Marketplace</h3>
+  <h3 align="center">Plataforma de Monitoramento de Bioma e NFT</h3>
   <a href="https://marketplace-46f99.web.app/">Link</a>
 
 </div>

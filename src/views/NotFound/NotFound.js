@@ -53,11 +53,11 @@ const NotFound = () => {
                     color="text.secondary"
                     align={isMd ? 'left' : 'center'}
                   >
-                    Oops! Looks like you followed a bad link.
+                    Oops! URL inválida!
                     <br />
-                    If you think this is a problem with us, please{' '}
+                    Se você acha que é um problema conosco, por favor {' '}
                     <Link href={''} underline="none">
-                      tell us
+                      contate-nos
                     </Link>
                   </Typography>
                   <Box

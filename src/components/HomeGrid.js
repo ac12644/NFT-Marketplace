@@ -21,7 +21,7 @@ const HomeGrid = ({ data = [] }) => {
           color={'secondary'}
           align={'center'}
         >
-          Popular NFTs
+          Biomas Populares
         </Typography>
         <Typography
           variant="h4"
@@ -32,7 +32,7 @@ const HomeGrid = ({ data = [] }) => {
             fontWeight: 700,
           }}
         >
-          Browse our popular NFTs
+          Veja nossos Biomas Populares
         </Typography>
       </Box>
       <Grid container spacing={{ xs: 2, sm: 4 }}>

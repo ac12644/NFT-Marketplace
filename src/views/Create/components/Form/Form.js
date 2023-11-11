@@ -26,24 +26,24 @@ const validationSchema = yup.object({
   name: yup
     .string()
     .trim()
-    .min(2, 'Name too short')
-    .max(50, 'Name too long')
-    .required('Please specify the name'),
+    .min(2, 'Nome muito curto')
+    .max(50, 'Nome muito grande')
+    .required('Digite um nome'),
   description: yup
     .string()
     .trim()
-    .max(1000, 'Should be less than 1000 chars')
-    .required('Please write description'),
+    .max(1000, 'Deve possuir menos de 1.000 Caracteres')
+    .required('Por favor, escreva a descrição'),
   price: yup
     .string()
-    .min(0, 'Price should be minimum 0')
-    .required('Please specify NFT price'),
+    .min(0, 'Preço deve ser no mínimo 0')
+    .required('Digite o preço da NFT'),
   address: yup
     .string()
-    .min(0, 'Price should be minimum 3')
+    .min(0, 'Preço deve ser no mínimo 3')
     .matches(
       /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Enter correct url!',
+      'Digite a URL correta!',
     ),
 });
 
@@ -113,7 +113,7 @@ const Form = () => {
         setHash(transaction.hash);
         setDialogBoxOpen(true);
       } catch (error) {
-        alert('Error in creating NFT! Please try again.');
+        alert('Erro ao criar NFT! Tente novamente.');
         setLoading(false);
       }
       if (fileInputRef.current) {
@@ -132,14 +132,14 @@ const Form = () => {
     const file = e.target.files[0];
     try {
       const added = await client.add(file, {
-        progress: (prog) => console.log(`received: ${prog}`),
+        progress: (prog) => console.log(`recebido: ${prog}`),
       });
       const url = `${infuraDomain}/ipfs/${added.path}`; //DEDICATED SUBDOMAIN FROM INFURA
       setFileUrl(url);
       console.log(url);
       setOpen(true);
     } catch (error) {
-      console.log('Error uploading file: ', error);
+      console.log('Erro ao carregar arquivo: ', error);
       setLoading(false);
       setOpen(false);
     }
@@ -160,7 +160,7 @@ const Form = () => {
       const url = `${infuraDomain}/ipfs/${added.path}`;
       createSale(url);
     } catch (error) {
-      console.log('Error uploading file: ', error);
+      console.log('Erro ao carregar arquivo: ', error);
     }
   }
 
@@ -200,7 +200,7 @@ const Form = () => {
                   </IconButton>
                 }
               >
-                File uploaded successfully!
+                Arquivo carregado com sucesso!
               </Alert>
             </Collapse>
             <Box sx={{ width: '100%' }}>
@@ -221,7 +221,7 @@ const Form = () => {
                   }
                   sx={{ mb: 2 }}
                 >
-                  Please upload a file!
+                  Carregue um Arquivo!
                 </Alert>
               </Collapse>
             </Box>
@@ -232,10 +232,10 @@ const Form = () => {
               sx={{ marginBottom: 2 }}
               fontWeight={700}
             >
-              NFT Name
+              Nome NFT
             </Typography>
             <TextField
-              label="Name of your NFT *"
+              label="Nome do Bioma *"
               variant="outlined"
               name={'name'}
               fullWidth
@@ -251,10 +251,10 @@ const Form = () => {
               sx={{ marginBottom: 2 }}
               fontWeight={700}
             >
-              Description
+              Descrição
             </Typography>
             <TextField
-              label="Description *"
+              label="Descrição *"
               variant="outlined"
               name={'description'}
               multiline
@@ -276,10 +276,10 @@ const Form = () => {
               sx={{ marginBottom: 2 }}
               fontWeight={700}
             >
-              Price
+              Preço
             </Typography>
             <TextField
-              label="Price in Matic *"
+              label="Valor do Bioma *"
               variant="outlined"
               name={'price'}
               fullWidth
@@ -298,7 +298,7 @@ const Form = () => {
               Link
             </Typography>
             <TextField
-              label="Link to your NFT"
+              label="Link para NFT"
               variant="outlined"
               name={'address'}
               fullWidth
@@ -325,7 +325,7 @@ const Form = () => {
                 loading={loading}
                 loadingPosition={'end'}
               >
-                Create
+                Criar
               </LoadingButton>
             </Box>
           </Grid>
@@ -334,9 +334,9 @@ const Form = () => {
       <DialogBox
         open={dialogBoxOpen}
         onClose={() => setDialogBoxOpen(false)}
-        title={'Yeee!'}
-        message={`NFT created successfully with hash: ${hash}`}
-        buttonText="View on polygonscan"
+        title={'Feito!'}
+        message={`NFT de seu Bioma Criada com sucesso, Hash: ${hash}`}
+        buttonText="Ver no polygonscan"
         buttonLink={`https://mumbai.polygonscan.com/tx/${hash}`}
       />
     </Box>

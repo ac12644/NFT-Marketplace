@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <title>NFT Marketplace</title>
+          <title>Bioma</title>
         </Head>
         <Page>
           <Component {...pageProps} />

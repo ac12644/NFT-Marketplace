@@ -31,8 +31,8 @@ const Footer = () => {
               component={'img'}
               src={
                 mode === 'light'
-                  ? 'https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fnft.png?alt=media&token=58741d5d-9f34-4884-a30e-3cb24c0f2028'
-                  : 'https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fnft.png?alt=media&token=58741d5d-9f34-4884-a30e-3cb24c0f2028'
+                  ? 'https://svgshare.com/i/zYS.svg'
+                  : 'https://svgshare.com/i/zYS.svg'
               }
               height={1}
               width={1}
@@ -47,7 +47,7 @@ const Footer = () => {
                 color="text.primary"
                 variant={'subtitle2'}
               >
-                Home
+                Início
               </Link>
             </Box>
             <Box marginTop={1} marginRight={1}>
@@ -58,7 +58,7 @@ const Footer = () => {
                 color="text.primary"
                 variant={'subtitle2'}
               >
-                Privacy
+                Privacidade
               </Link>
             </Box>   
           </Box>
@@ -71,7 +71,7 @@ const Footer = () => {
           color="text.secondary"
           gutterBottom
         >
-          &copy; NFT. 2022. MIT
+          &copy; NFT. 2023. MIT
         </Typography>
         {/* 
         <Typography

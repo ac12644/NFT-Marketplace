@@ -60,7 +60,7 @@ export default function CreateItem() {
     return (
       <Main>
         <Container>
-          <Hero title="No Assets Owned" />
+          <Hero title="Você Não Possuí Ativos" />
         </Container>
         <Box
           position={'relative'}
@@ -102,7 +102,7 @@ export default function CreateItem() {
   return (
     <Main>
       <Container>
-        <Hero title="A platform to create and trade NFTs." />
+        <Hero title="Preserve, Cuide e Monitore através de NFTs." />
       </Container>
       <Container paddingY={'0 !important'}>
         <PortfolioGrid data={nfts} buttonShow={false} />

@@ -28,7 +28,7 @@ const getTheme = (mode, themeToggler) =>
               paddingTop: 10,
               paddingBottom: 10,
             },
-            containedSecondary: mode === 'light' ? { color: 'white' } : {},
+            containedSecondary: mode === 'light' ? { color: 'green' } : {},
           },
         },
         MuiInputBase: {

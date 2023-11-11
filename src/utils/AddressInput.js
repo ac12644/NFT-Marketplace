@@ -84,7 +84,7 @@ function AddressInput(props) {
     <Input
       ref={input}
       size='large'
-      placeholder={props.placeholder ? props.placeholder : 'Public address'}
+      placeholder={props.placeholder ? props.placeholder : 'Endereço Público'}
       prefix={
         isDomain || address.length === 42 ? (
           <Blockie

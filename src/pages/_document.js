@@ -12,12 +12,12 @@ export default class MyDocument extends Document {
           <meta charSet="utf-8" />
           <link
             rel="shortcut icon"
-            href="https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fnft.png?alt=media&token=58741d5d-9f34-4884-a30e-3cb24c0f2028"
+            href="https://svgshare.com/i/zYS.svg"
           />
           <meta name="theme-color" content="#ffffff" />
           <meta
             name="description"
-            content="A nft marketplace to trade digital assets."
+            content="Plataforma para Preservação de Biomas e NFTs."
           />
           <meta
             name="robots"
@@ -27,15 +27,15 @@ export default class MyDocument extends Document {
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
-            content="https://firebasestorage.googleapis.com/v0/b/virtualground-meta.appspot.com/o/nft%2Fnft.png?alt=media&token=58741d5d-9f34-4884-a30e-3cb24c0f2028"
+            content="hhttps://svgshare.com/i/zYS.svg"
           />
           <meta
             property="og:title"
-            content="NFT Marketplace"
+            content="Mercado de NFT"
           />
           <meta
             property="og:description"
-            content="A NFT marketplace to trade your digital assets."
+            content="Plataforma para Preservação de Biomas e NFTs."
           />
           <meta
             property="og:url"
@@ -43,7 +43,7 @@ export default class MyDocument extends Document {
           />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+            href="https://svgshare.com/i/zYS.svg"
             rel="stylesheet"
           />
         </Head>

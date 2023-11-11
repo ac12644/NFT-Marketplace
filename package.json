@@ -57,7 +57,7 @@
     "firebase": "^9.8.4",
     "formik": "^2.2.6",
     "fs": "^0.0.1-security",
-    "hardhat": "^2.10.1",
+    "hardhat": "^2.19.0",
     "hardhat-gas-reporter": "^1.0.8",
     "ipfs-http-client": "^57.0.1",
     "jarallax": "^2.0.3",

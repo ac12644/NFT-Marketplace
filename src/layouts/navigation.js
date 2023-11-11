@@ -1,14 +1,14 @@
 const pages = [
   {
-    title: 'Home',
+    title: 'Início',
     href: '/',
   },
   {
-    title: 'Create NFT',
+    title: 'Criar Bioma',
     href: '/create',
   },
   {
-    title: 'All NFTs',
+    title: 'Todos Biomas',
     href: '/allNfts',
   },
 ];

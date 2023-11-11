@@ -31,7 +31,7 @@ const Hero = () => {
                   fontWeight: 700,
                 }}
               >
-                Discover, collect, and sell extraordinary NFTs
+                Cuide, Preserve e Monitore Biomas através de NFTs e IoT
               </Typography>
             </Box>
           </Box>
@@ -47,7 +47,7 @@ const Hero = () => {
               <Box
                 component={'img'}
                 src={
-                  'https://images.unsplash.com/photo-1654792393225-3e8a53d124d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80'
+                  'https://svgshare.com/i/zaR.svg'
                 }
                 width={1}
                 height={1}

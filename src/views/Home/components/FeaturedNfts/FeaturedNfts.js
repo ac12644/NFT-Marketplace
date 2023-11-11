@@ -39,7 +39,7 @@ const FeaturedNfts = ({ data = [] }) => {
           color={'secondary'}
           align={'center'}
         >
-          Trending NFTs
+          Biomas de Destaque
         </Typography>
         <Typography
           variant="h4"
@@ -50,7 +50,7 @@ const FeaturedNfts = ({ data = [] }) => {
             fontWeight: 700,
           }}
         >
-          Browse our trending NFTs
+          Veja os Melhores Biomas
         </Typography>
         <Box
           display="flex"
@@ -84,7 +84,7 @@ const FeaturedNfts = ({ data = [] }) => {
               </Box>
             }
           >
-            View all
+            Ver Todos
           </Button>
         </Box>
       </Box>
@@ -180,7 +180,7 @@ const FeaturedNfts = ({ data = [] }) => {
                   </CardContent>
                   <Box flexGrow={1} />
                   <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Button>Link to NFT</Button>
+                    <Button>Link para NFT</Button>
                   </CardActions>
                 </Box>
               </Box>

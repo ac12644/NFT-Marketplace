@@ -14,7 +14,7 @@ export default function CreateItem() {
   return (
     <Main>
       <Container>
-        <Hero title="A platform to create and trade NFTs." />
+        <Hero title="Cuide e Preserve Através de NFTs." />
       </Container>
       <Container paddingY={'0 !important'}>
         <Form />
