@@ -144,6 +144,11 @@ const PortfolioGrid = ({ data = [], buttonShow }) => {
                     </Typography>
                   </Box>
                   <CardActions sx={{ justifyContent: 'flex-end' }}>
+                    <Button
+                      href={`/devices/${item.tokenId}`}
+                    >
+                      Devices
+                    </Button>
                     {buttonShow && (
                       <Button
                         onClick={() => buyNft(item)}

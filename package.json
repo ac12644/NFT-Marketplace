@@ -33,6 +33,13 @@
       "last 1 safari version"
     ]
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "net": false,
+    "tls": false
+  },
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.4.1",
     "@emotion/cache": "^11.7.1",
@@ -52,6 +59,8 @@
     "card-validator": "^8.1.1",
     "chai": "^4.3.6",
     "dotenv": "^16.0.1",
+    "echarts": "^5.4.3",
+    "echarts-for-react": "^3.0.2",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.9",
     "firebase": "^9.8.4",
@@ -61,6 +70,7 @@
     "hardhat-gas-reporter": "^1.0.8",
     "ipfs-http-client": "^57.0.1",
     "jarallax": "^2.0.3",
+    "net": "^1.0.2",
     "next": "^12.1.6",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
@@ -72,8 +82,10 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-typed": "^1.2.0",
     "react-visibility-sensor": "^5.1.1",
+    "serverless-mysql": "^1.5.5",
     "slick-carousel": "^1.8.1",
     "solidity-coverage": "^0.7.21",
+    "tls": "^0.0.1",
     "web3": "^1.7.5",
     "web3modal": "^1.9.8",
     "yup": "^0.32.11"
