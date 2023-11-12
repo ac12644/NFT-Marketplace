@@ -45,6 +45,14 @@ const validationSchema = yup.object({
       /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
       'Digite a URL correta!',
     ),
+  deviceUID: yup
+    .string()
+    .trim()
+    .required('Device UID is required'),
+  sensorType: yup
+    .string()
+    .trim()
+    .required('Sensor Type is required'),
 });
 
 const Form = () => {
@@ -54,6 +62,8 @@ const Form = () => {
       description: '',
       price: '',
       address: '',
+      deviceUID: '', // New
+      sensorType: '', // New
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -146,7 +156,7 @@ const Form = () => {
   }
 
   async function createMarket() {
-    const { name, description, price, address } = formik.values;
+    const { name, description, price, address, deviceUID, sensorType } = formik.values;
     if (!name || !description || !price || !fileUrl) return;
     /* first, upload to IPFS */
     const data = JSON.stringify({
@@ -154,6 +164,8 @@ const Form = () => {
       description,
       address,
       image: fileUrl,
+      deviceUID, // New
+      sensorType, // New
     });
     try {
       const added = await client.add(data);
@@ -308,6 +320,37 @@ const Form = () => {
               helperText={formik.touched.address && formik.errors.address}
             />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }} fontWeight={700}>
+              UID Dispositivo
+            </Typography>
+            <TextField
+              label="Device UID *"
+              variant="outlined"
+              name={'deviceUID'}
+              fullWidth
+              onChange={formik.handleChange}
+              value={formik.values?.deviceUID}
+              error={formik.touched.deviceUID && Boolean(formik.errors.deviceUID)}
+              helperText={formik.touched.deviceUID && formik.errors.deviceUID}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }} fontWeight={700}>
+              Tipo de Sensor
+            </Typography>
+            <TextField
+              label="Sensor Type *"
+              variant="outlined"
+              name={'sensorType'}
+              fullWidth
+              onChange={formik.handleChange}
+              value={formik.values?.sensorType}
+              error={formik.touched.sensorType && Boolean(formik.errors.sensorType)}
+              helperText={formik.touched.sensorType && formik.errors.sensorType}
+            />
+          </Grid>
+
           <Grid item container xs={12}>
             <Box
               display="flex"

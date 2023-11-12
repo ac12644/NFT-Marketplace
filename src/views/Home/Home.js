@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-import HomeGrid from 'components/HomeGrid';
+//import HomeGrid from 'components/HomeGrid';
 import Contact from 'components/Contact';
 import Hero from './components/Hero';
 import FeaturedNfts from './components/FeaturedNfts';
@@ -101,9 +101,6 @@ const Home = () => {
     <Main>
       <Container>
         <Hero />
-      </Container>
-      <Container paddingY={3}>
-        <HomeGrid data={nfts} />
       </Container>
       <Container>
         <FeaturedNfts data={nfts} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'; 
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import Box from '@mui/material/Box';
@@ -10,12 +10,28 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+
 
 const FeaturedNfts = ({ data = [] }) => {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
-  });
+  const isMd = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true });
+
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedSensor, setSelectedSensor] = useState({});
+
+
+const handleSensorClick = (sensorDetails) => {
+  setSelectedSensor(sensorDetails);
+  setOpenDialog(true);
+};
+
+const handleCloseDialog = () => {
+  setOpenDialog(false);
+};
 
   const sliderOpts = {
     dots: true,
@@ -181,12 +197,49 @@ const FeaturedNfts = ({ data = [] }) => {
                   <Box flexGrow={1} />
                   <CardActions sx={{ justifyContent: 'flex-end' }}>
                     <Button>Link para NFT</Button>
+                    {/* Render 'Detalhes do Sensor' button only if sensorDetails are available */}
+                    {item.sensorDetails && (
+                      <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        onClick={() => handleSensorClick(item.sensorDetails)}
+                      >
+                        Detalhes do Sensor
+                      </Button>
+                    )}
                   </CardActions>
+
+
                 </Box>
               </Box>
             </Box>
           ))}
         </Slider>
+<Dialog open={openDialog} onClose={handleCloseDialog}>
+  <DialogContent>
+    <DialogContentText>
+      {/* Display sensor details if available */}
+      {selectedSensor && (
+        <>
+          Sensor: {selectedSensor.name || 'N/A'}
+          <br />
+          Type: {selectedSensor.type || 'N/A'}
+          {/* Additional details can be added here */}
+        </>
+      )}
+    </DialogContentText>
+  </DialogContent>
+  {/* Render the Close button only if the sensor object exists and has name or type */}
+  {selectedSensor && (selectedSensor.name || selectedSensor.type) && (
+    <DialogActions>
+      <Button onClick={handleCloseDialog} color="primary">
+        Fechar
+      </Button>
+    </DialogActions>
+  )}
+</Dialog>
+
+
       </Box>
     </Box>
   );
