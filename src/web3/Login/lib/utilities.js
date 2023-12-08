@@ -9,7 +9,7 @@ export function getChainData(chainId) {
   )[0]
 
   if (!chainData) {
-    throw new Error('ChainId missing or not supported')
+    return true; // return true for toast message
   }
 
   const API_KEY = 'a1f754ea74b24beea097773f476894e0';

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useReducer, useState } from 'react';
-import { IconButton } from '@mui/material';
+import { IconButton, Alert, Collapse } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import Account from './components/Account';
-
+import CloseIcon from '@mui/icons-material/Close';
 import { ellipseAddress, getChainData } from './lib/utilities';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { providers } from 'ethers';
@@ -74,6 +74,8 @@ export const Login = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { provider, web3Provider, address, chainId } = state;
 
+  const [alertOpen, setAlertOpen] = useState(false);
+
   const connect = useCallback(async function () {
     // This is the initial `provider` that is returned when
     // using web3Modal to connect. Can be MetaMask or WalletConnect.
@@ -88,6 +90,14 @@ export const Login = () => {
     const address = await signer.getAddress();
 
     const network = await web3Provider.getNetwork();
+
+    const chainData = getChainData(network.chainId);
+
+    if (chainData == true) {
+      setAlertOpen(true);
+      return null;
+    }
+    setAlertOpen(false);
 
     dispatch({
       type: 'SET_WEB3_PROVIDER',
@@ -159,8 +169,6 @@ export const Login = () => {
     }
   }, [provider, disconnect]);
 
-  const chainData = getChainData(chainId);
-
   return (
     <div className="container">
       {web3Provider ? (
@@ -174,6 +182,27 @@ export const Login = () => {
           <AccountBalanceWalletIcon fontSize="large" />
         </IconButton>
       )}
+      <Collapse
+        style={{ position: 'fixed', left: 0, bottom: 0, margin: '1pc' }}
+        in={alertOpen}
+      >
+        <Alert
+          severity="error"
+          action={
+            <IconButton
+              onClick={() => {
+                setAlertOpen(false);
+              }}
+            >
+              {' '}
+              <CloseIcon />
+            </IconButton>
+          }
+          sx={{ mb: 2 }}
+        >
+          ChainId missing or not supported
+        </Alert>
+      </Collapse>
     </div>
   );
 };
