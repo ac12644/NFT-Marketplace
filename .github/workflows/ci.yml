@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    name: Contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Compile
+        run: pnpm compile
+
+      # 101 TypeScript tests plus the Solidity fuzz and invariant suites.
+      - name: Test
+        run: pnpm test
+
+  analysis:
+    name: Static analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Slither
+        run: pipx install slither-analyzer
+
+      # Drives solc directly: crytic-compile does not understand Hardhat 3's
+      # build-info format, and pnpm's symlinked store is not resolvable by solc.
+      - name: Slither
+        run: ./contracts/scripts/slither.sh
+
+  web:
+    name: Web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm compile
+      - run: pnpm typecheck
+      - run: pnpm build
+        env:
+          # Build-time placeholders; real values come from Vercel.
+          NEXT_PUBLIC_MARKETPLACE_ADDRESS: '0x0000000000000000000000000000000000000001'
+          NEXT_PUBLIC_FACTORY_ADDRESS: '0x0000000000000000000000000000000000000002'
+          NEXT_PUBLIC_DEPLOY_BLOCK: '0'

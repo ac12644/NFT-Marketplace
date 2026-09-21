@@ -1,0 +1,5 @@
+{
+  "detectors_to_exclude": "naming-convention,solc-version,pragma,similar-names,timestamp",
+  "filter_paths": "node_modules|src/mocks",
+  "exclude_dependencies": true
+}
