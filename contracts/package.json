@@ -1,0 +1,27 @@
+{
+  "name": "contracts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:amoy": "hardhat ignition deploy ignition/modules/Marketplace.ts --network amoy",
+    "verify:amoy": "hardhat ignition verify chain-80002",
+    "art": "node scripts/generate-art.mjs",
+    "seed": "hardhat run scripts/seed.ts --network localhost",
+    "node": "hardhat node"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "5.0.7",
+    "@nomicfoundation/hardhat-verify": "^3.1.0",
+    "@types/node": "24.10.1",
+    "forge-std": "github:foundry-rs/forge-std#v1.11.0",
+    "hardhat": "3.17.0",
+    "typescript": "5.9.3",
+    "viem": "2.56.8"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.6.1",
+    "@openzeppelin/contracts-upgradeable": "5.6.1"
+  }
+}
