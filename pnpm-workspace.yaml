@@ -1,0 +1,7 @@
+packages:
+  - contracts
+  - web
+
+# Pins the Node runtime for every workspace script, so the repo does not depend
+# on whatever `node` happens to be on PATH. Hardhat 3 needs >=22.13.
+useNodeVersion: 24.21.0
