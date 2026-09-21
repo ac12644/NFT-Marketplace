@@ -1,0 +1,171 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+/* The artwork supplies all the colour. The interface is near-neutral so it
+   never competes with what it frames; gold appears only where something is
+   live or actionable, never as decoration. */
+:root {
+  --radius: 0.5rem;
+
+  --background: oklch(0.99 0.002 250);
+  --surface: oklch(1 0 0);
+  --surface-sunken: oklch(0.975 0.003 250);
+  --foreground: oklch(0.21 0.012 255);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.012 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.012 255);
+
+  --primary: oklch(0.21 0.012 255);
+  --primary-foreground: oklch(0.99 0.002 250);
+  --secondary: oklch(0.96 0.004 250);
+  --secondary-foreground: oklch(0.21 0.012 255);
+
+  --accent: oklch(0.79 0.152 78);
+  --accent-foreground: oklch(0.21 0.012 255);
+
+  --muted: oklch(0.965 0.003 250);
+  --muted-foreground: oklch(0.52 0.014 255);
+
+  --destructive: oklch(0.577 0.216 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.915 0.005 255);
+  --input: oklch(0.9 0.006 255);
+  --ring: oklch(0.79 0.152 78);
+}
+
+.dark {
+  --background: oklch(0.185 0.024 266);
+  --surface: oklch(0.232 0.027 266);
+  --surface-sunken: oklch(0.162 0.022 266);
+  --foreground: oklch(0.962 0.003 250);
+  --card: oklch(0.232 0.027 266);
+  --card-foreground: oklch(0.962 0.003 250);
+  --popover: oklch(0.252 0.028 266);
+  --popover-foreground: oklch(0.962 0.003 250);
+
+  --primary: oklch(0.962 0.003 250);
+  --primary-foreground: oklch(0.185 0.024 266);
+  --secondary: oklch(0.28 0.029 266);
+  --secondary-foreground: oklch(0.962 0.003 250);
+
+  --accent: oklch(0.8 0.152 78);
+  --accent-foreground: oklch(0.185 0.024 266);
+
+  --muted: oklch(0.28 0.029 266);
+  --muted-foreground: oklch(0.715 0.017 258);
+
+  --destructive: oklch(0.68 0.19 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.8 0.152 78);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 3px);
+  --radius-md: calc(var(--radius) - 1px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-synthesis-weight: none;
+  }
+
+  /* Identifiers — addresses, hashes, token ids — keep the fixed advance. */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  /* Quantities stay on the sans face with tabular figures, so columns still
+     align without the gappy look monospace gets at display sizes. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+    letter-spacing: -0.025em;
+  }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+/* Radix open/close transitions, kept to what shows a change. */
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes content-in {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.98); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+[data-slot='dialog-overlay'][data-state='open'] {
+  animation: overlay-in 140ms ease-out;
+}
+[data-slot='dialog-content'][data-state='open'] {
+  animation: content-in 140ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* A checkerboard behind artwork, so transparent PNGs read as transparent
+   rather than as a colour the page chose for them. */
+.artwork-backdrop {
+  background-image:
+    linear-gradient(45deg, var(--surface-sunken) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--surface-sunken) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--surface-sunken) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--surface-sunken) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
