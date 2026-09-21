@@ -48,8 +48,12 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Install Slither
-        run: pipx install slither-analyzer
+      # solc-select supplies the compiler; the script installs and selects the
+      # exact version the Hardhat config pins.
+      - name: Install Slither and solc-select
+        run: |
+          pipx install slither-analyzer
+          pipx install solc-select
 
       # Drives solc directly: crytic-compile does not understand Hardhat 3's
       # build-info format, and pnpm's symlinked store is not resolvable by solc.

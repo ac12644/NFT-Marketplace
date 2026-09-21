@@ -463,10 +463,16 @@ pnpm compile && pnpm test && pnpm typecheck && pnpm build
 
 | Issue                                           | Notes                                                                                                                                                                       |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Horizontal overflow below 640px**             | Real and reproducible. Not the dev overlay (production behaves the same), not the headless renderer, not the toast container, not the header row. Layout is clean at ≥640px |
 | **One hydration warning per page**              | A `Countdown` mismatch was found and fixed; a second remains. Not `next-themes` placement, not sonner's theme                                                               |
 | **No EIP-712 signed orders**                    | Listings are on-chain by choice — smaller audit surface. Off-chain orders would make listing gasless                                                                        |
 | **`PAUSER_ROLE` / `FEE_MANAGER_ROLE` coverage** | Tests prove non-holders are rejected, never that a dedicated role-holder succeeds                                                                                           |
+| **No deployment on Amoy yet** | The deploy guide is written from the Ignition module, not from a run. The first deployer may hit friction worth documenting |
+
+> **Measuring responsive layout:** Chrome headless clamps `--window-size` to a
+> 500px minimum, so a narrower screenshot is rendered at 500px and cropped —
+> which looks exactly like horizontal overflow when nothing is wrong. Measure
+> `scrollWidth` against `clientWidth` inside an iframe, or use real device
+> emulation, rather than trusting a narrow screenshot.
 
 <br />
 

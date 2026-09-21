@@ -24,13 +24,35 @@ cp -RL "$ROOT/node_modules/@openzeppelin/contracts-upgradeable" \
 cp -R "$ROOT/src" "$STAGE/src"
 cp "$ROOT/slither.config.json" "$STAGE/slither.config.json"
 
-solc-select use 0.8.37 >/dev/null 2>&1 || true
+# Slither drives solc itself, so the pinned compiler has to be on PATH. The
+# version is read from the Hardhat config rather than repeated here, so the
+# two cannot drift apart.
+SOLC="$(sed -n "s/.*version: '\([0-9.]*\)'.*/\1/p" hardhat.config.ts | head -1)"
+if [ -z "$SOLC" ]; then
+  echo "could not read the solc version from hardhat.config.ts" >&2
+  exit 1
+fi
+
+if ! command -v solc-select >/dev/null 2>&1; then
+  echo "solc-select is required — install it with: pipx install solc-select" >&2
+  exit 1
+fi
+
+solc-select install "$SOLC" >/dev/null
+solc-select use "$SOLC" >/dev/null
+
+# Fail loudly rather than letting Slither report a compilation error later.
+solc --version 2>/dev/null | grep -q "$SOLC" || {
+  echo "solc $SOLC is not active after solc-select use" >&2
+  exit 1
+}
 
 cd "$STAGE"
 STATUS=0
 for target in Marketplace MarketplaceCollection CollectionFactory MarketplaceProxy; do
   echo "── $target.sol"
   slither "src/$target.sol" \
+    --compile-force-framework solc \
     --solc-args "--base-path . --include-path node_modules --evm-version cancun --optimize --optimize-runs 200" \
     --config-file slither.config.json || STATUS=$?
 done
